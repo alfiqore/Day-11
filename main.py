@@ -47,44 +47,50 @@ def play():
     print(f"Player : {player} ; {count(player)}")
     print(f"Dealer : {dealer} ; {count(dealer)}")
     keep_playing = True
-    while keep_playing == True:
-        if count(player) == 21:
-            while count(dealer) < 17:
-                add_card(dealer)
-            if count(dealer) > 21:
-                print(f"Dealer : {dealer} ; {count(dealer)}")
-                print("Dealer Bust")
-                break
-            elif count(dealer) > 17:
-                print(f"Player : {player} ; {count(player)}")
-                print(f"Dealer : {dealer} ; {count(dealer)}")
-                winner(player, dealer)
-                break
-
-        decision = (input("Hit or stand? H/S ")).lower()
-
-        if decision == 'h':
-            add_card(player)
+    if count(player) == 21:
+        while count(dealer) < 17:
+            add_card(dealer)
+        if count(dealer) > 21:
+            print(f"Dealer : {dealer} ; {count(dealer)}")
+            print("Dealer Bust")
+            if input("do you want to play again : y/n ") == 'y':
+                play()
+            else:
+                exit()
+        if count(dealer) > 17:
             print(f"Player : {player} ; {count(player)}")
-            if count(player) > 21:
-                print("You Bust")
-                keep_playing = False
-        if decision == 's':
-            while count(dealer) < 17:
-                add_card(dealer)
+            print(f"Dealer : {dealer} ; {count(dealer)}")
+            winner(player, dealer)
+            if input("do you want to play again : y/n ") == 'y':
+                play()
+            else:
+                exit()
+    else:
+        while keep_playing == True:
+            decision = (input("Hit or stand? H/S ")).lower()
+
+            if decision == 'h':
+                add_card(player)
+                print(f"Player : {player} ; {count(player)}")
+                if count(player) > 21:
+                    print("You Bust")
+                    keep_playing = False
+            elif decision == 's':
+                while count(dealer) < 17:
+                    add_card(dealer)
                 if count(dealer) > 21:
-                    print(f"Dealer : {dealer} ; {count(dealer)}")
+                    print(f"\nDealer : {dealer} ; {count(dealer)}")
                     print("Dealer Bust")
                     keep_playing = False
                 elif count(dealer) > 17:
-                    print(f"Player : {player} ; {count(player)}")
+                    print(f"\nPlayer : {player} ; {count(player)}")
                     print(f"Dealer : {dealer} ; {count(dealer)}")
                     winner(player, dealer)
                     keep_playing = False
-    if input("do you want to play again : y/n") == 'y':
-        play()
-    else:
-        exit
+        if input("do you want to play again : y/n ") == 'y':
+            play()
+        else:
+            exit()
 
 
 play()

@@ -1,5 +1,5 @@
 import random
-from replit import clear  # Pastikan ini benar dan diimpor dengan benar
+# from replit import clear  # Pastikan ini benar dan diimpor dengan benar
 from art import logo
 
 
@@ -56,7 +56,6 @@ def play():
 
     keep_playing = True
     while keep_playing:
-        clear()
         if count(player) == 21:
             print("Blackjack! Player wins.")
             keep_playing = False
@@ -78,8 +77,7 @@ def play():
             winner(player, dealer)
             keep_playing = False
 
-    if input("Do you want to play again? y/n : ").lower() == 'y':
-        clear()
+    if input("Do you want to play again? y/n: ").lower() == 'y':
         play()
     else:
         exit()
